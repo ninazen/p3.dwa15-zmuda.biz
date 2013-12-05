@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+    Document   : index.html
+    Author     : Nina Zmuda
+    Class      : CSCE-15 Project 3
+    Description: Main HTML for tiktok - a pomodoro-type timer
+-->
+<html>
+<head>
+	<title>TikTok</title>
+
+	<!-- CSS -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<link rel="stylesheet" href="css/tiktok.css" type="text/css">
+	<link href="css/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
+	
+	<!-- JS -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.timer.js"></script>
+	<script type="text/javascript" src="js/tiktok.js"></script>			
+	
+	<!-- Controller Specific JS/CSS -->
+	<!-- None needed -->
+	
+</head>
+
+<body>	
+
+	<div id="wrapper"><br>
+
+	<!-- Title -->
+	<div id="logo" class="logo"></div>
+	<h2>a pomodoro timer</h2>
+
+	<!-- Graphic Timers -->
+	<div id="timers">
+
+		<!-- Welcome Timer -->		
+		<div id="welcome-timer" class="pom-timer">
+			<div id="welcome-msg">
+			Welcome!<br>
+			This timer is an aid<br>
+			to help you practice the<br><br>
+			<div class="pt-title">Pomodoro<br>Technique</div><br>
+			</div>
+		</div>
+			
+		<!-- Pom Timer -->				
+		<div id="pom-timer" class="pom-timer">
+			<div id="start-timer"></div>
+		</div>
+
+		<!-- Break Timer -->			
+		<div id="java-timer" class="java-timer">
+			<div id="break-timer"></div>
+		</div>		 
+		 
+	</div>
+
+	<!-- Timer Buttons -->
+	<div id="buttons">
+
+		<!-- Start button -->				
+		<div id="start-block">
+			<input type="button" class="button-pom" id="start" value="Start a Pom">
+			<input type="text" class="time-select text-field" id="pom-count" value="2" disabled="disabled">
+			<!-- NOTE: For testing purposes this default value was changed to 2 from 25-->
+		</div>
+
+		<!-- Break button -->
+		<div id="break-block">
+			<input type="button" class="button-break" id="break" value="Take a Break">
+			<input type="text" class="time-select text-field" id="min-count" disabled="disabled">
+			<br>
+
+			<!-- Break time slider -->
+			<div id="min-slider" class="time-slider" ></div><br>
+		</div>
+
+	</div>
+	
+	<!-- Nav buttons -->
+	<input type="button" class="button-link" id="breakLink" value="Break">
+
+	<input type="button" class="button-link" id="infoLink" value="What's a Pom?">
+			
+	<input type="button" class="button-link" id="pomLink" value="Pom">
+
+	<div id="breakInfoPage" type="button" class="info-page break-info-page">
+		<div class="text-bold">Break = a respite from Poms</div><br>
+		Take a 5 minute break between pomodoros. After every fourth pomodoro, take a longer break for 15-30 minutes.<br><br>
+		<div class="text-italic">Click here for the break timer.</div>
+	</div>
+
+	<div id="infoPage" type="button" class="info-page pt-info-page">
+		<div class="text-bold">Pomodoro = Tomato in Italian</div><br>
+		The <a href="http://www.pomodorotechnique.com">Pomodoro Technique</a> is a deceptively simple-to-learn method of time management that can be life-changing when used effectively, with intuitive guidelines for tackling tasks of all sizes, managing distractions, and reducing burnout.<br><br>
+		<div class="text-italic">Coming soon to this site: automated worksheets for<br>To Do Today, Activity Inventory, and Records.</div>
+	</div>
+
+	<div id="pomInfoPage" type="button" class="info-page pom-info-page">
+		<div class="text-bold">Pom = short for pomodoro</div><br>
+		Poms are short sprints of focused activity that last 25 minutes. Breaks should always be taken between poms to refresh.<br><br>
+		<div class="text-italic">Click here for the pom timer.</div>
+	</div>
+
+	<div id="footer">
+	</div>
+
+	</div>
+<br> 
+
+</body>
+</html>
+<!-- Localized -->
