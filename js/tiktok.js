@@ -120,13 +120,13 @@ $(document).ready(function() {
 	
 	$('#start').click(function() {
 
-		// Default to 25 minutes for all pomodoros (not variable)
-		// NOTE: For testing purposes, we've changed this to 2 minutes
-		$('#pom-count').value="2";
+		// Default to a fixed 25 minutes for all pomodoros - this is set in index.html
+		// NOTE: For testing purposes, we've temporarily changed this to 3 minutes
 
 		// Create the timer
 		if (countdownTimer == "") {
-			var countdownCurrent = (($('#pom-count').val() * 6000));
+			// Subtract one second off to avoid the initial flash
+			var countdownCurrent = (($('#pom-count').val() * 6000)) - 1;
 
 			countdownTimer = $.timer(function() {
 				var hour = parseInt (countdownCurrent/360000);
@@ -183,12 +183,13 @@ $(document).ready(function() {
 		// Default to 5 minutes if no time is chosen
 		// NOTE: For testing purposes we've changed this to 1 minute
 		if ($('#break-timer').html()=="") {
-			$('#min-count').value="1";
+			$('#min-count').val("1");
 		}	
 		
 		// Start the timer
 		if (countdownTimer == "") {
-			var countdownCurrent = (($('#min-count').val() * 6000));
+			// Subtract one second off to avoid the initial flash
+			var countdownCurrent = (($('#min-count').val() * 6000))-1;
 
 			countdownTimer = $.timer(function() {
 				var hour = parseInt (countdownCurrent/360000);
@@ -239,34 +240,50 @@ $(document).ready(function() {
 
 	/*-- Global Navigation Links --*/
 
-	// Toggle display of the Info Page
-	$("#breakLink").click(function() { 
-		$('#breakInfoPage').toggle(); 
+	// Go to the Start a Pom Page on double click
+	$("#pomLink").dblclick(function() { 
+		$('#pomInfoPage').hide(); 
+		swapToStartTimer();; 
 	} );
 
-	// Jump to the Take a Break page
-	$("#breakInfoPage").click(function() { 
-		swapToBreakTimer(); 
-	} );
-
-	// Toggle display of the Info Page
-	$("#infoLink").click(function() { 
-		$('#infoPage').toggle(); 
-	} );
-
-	// Jump to the Pomodoro site
-	$("#infoPage").click(function() { 
-		// do nothing (for consistency) 
-	} );
-
-	// Toggle display of the Pom Page
+	// Toggle display of the Pom info
 	$("#pomLink").click(function() { 
 		$('#pomInfoPage').toggle(); 
 	} );
 
-	// Jump to the Start a Pom page
+	// Close the Pom info
 	$("#pomInfoPage").click(function() { 
-		swapToStartTimer(); 
+		$('#pomInfoPage').hide(); 
+	} );
+
+	// No action for double click on General info
+	$("#infoLink").dblclick(function() { 
+		// Do nothing for now
+	} );
+
+	// Toggle display of the General info
+	$("#infoLink").click(function() { 
+		$('#infoPage').toggle(); 
+	} );
+
+	// Close the General info
+	$("#infoPage").click(function() { 
+		$('#infoPage').hide(); 
+	} );
+
+	// Jump to the Take a Break page on double click
+	$("#breakLink").dblclick(function() { 
+		swapToBreakTimer(); 
+	} );
+
+	// Toggle display of the Break info
+	$("#breakLink").click(function() { 
+		$('#breakInfoPage').toggle(); 
+	} );
+
+	// Close the Break info
+	$("#breakInfoPage").click(function() { 
+		$('#breakInfoPage').hide(); 
 	} );
 
 	// Jump to the Start a Pom page
