@@ -68,7 +68,7 @@ h3 {
     margin-left: 280px;
 }
 
-/* The start time countdown */
+/* The start timer countdown */
 #start-timer {
     position: absolute;
     font-size: 100px;
@@ -84,7 +84,7 @@ h3 {
     margin-left: 380px;
 }
 
-/* The break time countdown */
+/* The break timer countdown */
 #break-timer {
     position: absolute;
     font-size: 100px;
@@ -115,6 +115,7 @@ h3 {
 
 /********** CLASSES **********/
 
+/* The Pomodoro Technique title */
 .pt-title {
     margin-top: 2px;
     margin-left: 10px;
@@ -124,6 +125,7 @@ h3 {
     color: #66FF00;
 }
 
+/* The Start a Pom button */
 .button-pom {
     background-color: #3366FF;
     color: white;
@@ -136,6 +138,7 @@ h3 {
     margin-bottom: 5px;
 }
 
+/* The Take a Break button */
 .button-break {
     background-color: #006633;
     color: white;
@@ -148,6 +151,7 @@ h3 {
     margin-bottom: 5px;
 }
 
+/* The global nav buttons */
 .button-link {
     background-color: #CCFFE0;
     color: #909090;
@@ -161,21 +165,25 @@ h3 {
     margin-bottom: 2px;
 }
 
+/* The Pom informational page */
 .pom-info-page {
     height: 150px;
     margin-top: -595px;
 }
 
+/* The Pomodoro Technique informational page */
 .pt-info-page {
     height: 255px;
     margin-top: -435px;
 }
 
+/* The Break informational page */
 .break-info-page {
     height: 150px;
     margin-top: -170px;
 }
 
+/* The informational pages */
 .info-page {
     position: absolute;
     background-color: #FFFFCC;
@@ -195,6 +203,8 @@ h3 {
     padding-top: 5px;
 }
 
+/* Text styles */
+
 .text-bold {
    font-weight: bold;
 }
@@ -210,7 +220,7 @@ h3 {
     border: 1px solid orange;
 }
 
-/* Show the background pomodoro image */
+/* Tik Tok logo image */
 .logo {
     background: url("../images/tiktok-logo-gold.png");
     background-repeat:no-repeat;
@@ -223,7 +233,7 @@ h3 {
     margin:0 auto;
 }
 
-/* Show the background pomodoro image */
+/* Java image */
 .java-timer {
     background: url("../images/java.png");
     background-repeat:no-repeat;
@@ -236,7 +246,7 @@ h3 {
     margin:0 auto;
 }
 
-/* Show the background pomodoro image */
+/* Pomodoro image */
 .pom-timer {
     background: url("../images/pomo.png");
     background-repeat:no-repeat;
@@ -249,7 +259,7 @@ h3 {
     margin:0 auto;
 }
 
-/* Show the selected time on top of the buttons */
+/* Countdown time shown on top of the buttons */
 .time-select {
     position: absolute;
     border: 0px;
@@ -264,7 +274,7 @@ h3 {
     margin-left: -32px;
 }
 
-/* Show the time selection slider bar */
+/* The time selection slider bar */
 .time-slider {
     margin-top: -5px;
     margin-bottom: 5px;

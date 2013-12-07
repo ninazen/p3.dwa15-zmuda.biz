@@ -5,6 +5,10 @@
     Description: Javascripts for tiktok program
 */
 
+// Some global variables
+var countdownTimer = "";
+var clickSound = new Audio('sounds/done.wav');
+
 // Disable return key from imitating a button press
 function stopRKey(evt) {
 	var evt  = (evt) ? evt : ((event) ? event : null);
@@ -22,45 +26,17 @@ function pad(number, length) {
 
 // Countdown reset
 function countdownReset() {
-	var newCount = parseInt($('input[name=startTime]').val())*100;
-	if(newCount > 0) {countdownCurrent = newCount;}
-	countdownTimer.stop().once();
-}
-
-var countdownTimer = "";
-var clickSound = new Audio('sounds/done.wav');
-
-function swapToBreakTimer() {
-
-	// Reset the countdown
 	if (countdownTimer != "") {
 		countdownTimer.stop();
 		countdownTimer = "";
 	}
-
-	// Hide the welcome message
-	$('#welcome-timer').hide();
-
-	// Hide the start timer and button
-	$('#pom-timer').hide();
-	$('#start-timer').hide();
-	$('#start-block').hide();
-
-	// Change the button text and show timer and buttons
-	$('#break').prop('value','Take a Break');
-	$('#java-timer').show();
-	$('#break-timer').hide();
-	$('#break-block').show();
-	$('#min-slider').show();	
 }
 
+// Swap in the Start Timer (Pomodoro)
 function swapToStartTimer() {
 
 	// Reset the countdown
-	if (countdownTimer != "") {
-		countdownTimer.stop();
-		countdownTimer = "";
-	}
+	countdownReset();
 
 	// Hide the welcome message
 	$('#welcome-timer').hide();
@@ -71,13 +47,36 @@ function swapToStartTimer() {
 	$('#break-block').hide();
 	$('#min-slider').hide();			
 
-	// Show the start timer and buttons
+	// Show the start timer and start button
 	$('#start').prop('value','Start a Pom');
 	$('#pom-timer').show();
 	$('#start-timer').hide();
 	$('#start-block').show();}
 
-// Prepare timers
+// Swap in the Break Timer
+function swapToBreakTimer() {
+
+	// Reset the countdown
+	countdownReset();
+
+	// Hide the welcome message
+	$('#welcome-timer').hide();
+
+	// Hide the start timer and button
+	$('#pom-timer').hide();
+	$('#start-timer').hide();
+	$('#start-block').hide();
+
+	// Change the break timer and break button
+	$('#break').prop('value','Take a Break');
+	$('#java-timer').show();
+	$('#break-timer').hide();
+	$('#break-block').show();
+	$('#min-slider').show();	
+}
+
+/*-- Main functions --*/
+
 $(document).ready(function() {
 
 	// Hide error messages
@@ -123,16 +122,17 @@ $(document).ready(function() {
 		// Default to a fixed 25 minutes for all pomodoros - this is set in index.html
 		// NOTE: For testing purposes, we've temporarily changed this to 3 minutes
 
-		// Create the timer
+		// No countdown started yet - initiate the timer
 		if (countdownTimer == "") {
+
 			// Subtract one second off to avoid the initial flash
 			var countdownCurrent = (($('#pom-count').val() * 6000)) - 1;
 
+			// Calculate new timer value
 			countdownTimer = $.timer(function() {
 				var hour = parseInt (countdownCurrent/360000);
 				var min = parseInt(countdownCurrent/6000)-(hour*60);
 				var sec = parseInt(countdownCurrent/100)-(hour*3600)-(min*60);
-
 				$('#start-timer').html(pad(min,2)+":"+pad(sec,2));
 
 				// Timer completed, sound an alert and move to next step
@@ -149,8 +149,6 @@ $(document).ready(function() {
 				}
 			}, 70, true);
 
-			// Prep the timer
-
 			// Hide the welcome message
 			$('#welcome-timer').hide();
 
@@ -164,14 +162,13 @@ $(document).ready(function() {
 			$('#start-block').show();			
 		} 
 
-		// Stop the timer if period expires or user cancels
-		// Reset the buttons to show Take a Break next
+		// User selects Quit to interrupt the timer
 		else {
 
 			// If user wants to quit early, confirm it
 			if (confirm("Do you really want to QUIT this pomodoro?") ) {
 
-				// If confirmed, end the timer
+				// If confirmed, stop the countdown and refresh the timer
 				swapToStartTimer();			}
 		}
 	});
@@ -186,11 +183,13 @@ $(document).ready(function() {
 			$('#min-count').val("1");
 		}	
 		
-		// Start the timer
+		// No countdown started yet - initiate the timer
 		if (countdownTimer == "") {
+
 			// Subtract one second off to avoid the initial flash
 			var countdownCurrent = (($('#min-count').val() * 6000))-1;
 
+			// Calculate new timer value
 			countdownTimer = $.timer(function() {
 				var hour = parseInt (countdownCurrent/360000);
 				var min = parseInt(countdownCurrent/6000)-(hour*60);
@@ -225,20 +224,25 @@ $(document).ready(function() {
 			$('#min-slider').hide();			
 		} 
 
-		// Stop the timer if period expires or user cancels
-		// Reset the buttons to show Start a Pomodoro next
+		// User selects Quit to interrupt the timer
 		else {
 
 			// If user wants to quit early, confirm it
 			if (confirm("Did you finish your break early?") ) {
 
-				// If confirmed, end the timer
+				// If confirmed, stop the countdown and refresh the timer
 				swapToBreakTimer();
 			}
 		}
 	});
 
 	/*-- Global Navigation Links --*/
+
+	// Note: It is a known artifact of jquery that the double click event also sends
+	//       two single click events.  While there are workarounds for this,
+	//		 it is actually the author's design decision to allow this to remain,
+	//		 so that the message block flashes on and off (or off and on) on doubleclick.
+	//		 This provides some visual feedback for the user on the doubleclick action.
 
 	// Go to the Start a Pom Page on double click
 	$("#pomLink").dblclick(function() { 
@@ -286,7 +290,7 @@ $(document).ready(function() {
 		$('#breakInfoPage').hide(); 
 	} );
 
-	// Jump to the Start a Pom page
+	// Jump to the Start a Pom page (home) when the top logo is clicked
 	$("#logo").click(function() { 
 		swapToStartTimer(); 
 	} );
